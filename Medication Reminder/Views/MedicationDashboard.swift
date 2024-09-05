@@ -9,13 +9,14 @@ import SwiftUI
 import SwiftData
 
 struct MedicationDashboard: View {
+    @Environment(\.modelContext) private var modelContext
     @Query private var medications: [Medication]
 
     var body: some View {
         NavigationStack { // Note: NavigationStack for hierarchical navigation
             VStack {
                 Text("Medication Reminders")
-                    .font(.largeTitle)
+                    .font(.headline)
                 List {
                     ForEach(medications) { medication in
                         NavigationLink(destination: EditMedicationView(medication: medication)) {
@@ -38,7 +39,15 @@ struct MedicationDashboard: View {
 }
 
 struct MedicationDashboardRow: View {
+    @Environment(\.modelContext) private var modelContext
+
     let medication: Medication
+    @State private var isReminderSet: Bool
+    
+    init(medication: Medication) {
+        self.medication = medication
+        _isReminderSet = State(initialValue: medication.isReminderSet)
+    }
 
     var body: some View {
         HStack {
@@ -49,11 +58,19 @@ struct MedicationDashboardRow: View {
             }
             Spacer()  // Push elements to the left
 
-            // Example: "Active/Inactive" Toggle
-            Toggle("", isOn: .constant(medication.isReminderSet))
-                .labelsHidden() // Hide the label for a more compact look
+            Toggle("", isOn: $isReminderSet)
+                .onChange(of: isReminderSet, {
+                    isReminderSet.toggle()
+                    do {
+                        try modelContext.save()
+                    } catch {
+                        print("isReminder did not save.")
+                    }
+                })
+                .labelsHidden()  // Hide the label for a more compact look
         }
     }
+
 
 }
 

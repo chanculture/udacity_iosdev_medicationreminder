@@ -18,7 +18,6 @@ struct EditMedicationView: View {
     @State private var name: String = ""
     @State private var dosage: String = ""
     @State private var time: Date = Date()  // Notice: Using Date for time editing
-    @State private var isReminderSet: Bool = false
 
     init(medication: Medication?) {
         self.medication = medication
@@ -27,7 +26,6 @@ struct EditMedicationView: View {
             _name = State(initialValue: medication.name)
             _dosage = State(initialValue: medication.dosage)
             _time = State(initialValue: Date(timeIntervalSinceReferenceDate: medication.time))
-            _isReminderSet = State(initialValue: medication.isReminderSet)
         }
     }
 
@@ -37,13 +35,13 @@ struct EditMedicationView: View {
                 TextField("Name", text: $name)
                 TextField("Dosage", text: $dosage)
                 DatePicker("Time", selection: $time, displayedComponents: .hourAndMinute)
-                Toggle("Reminder", isOn: $isReminderSet)
             }
         }
-        .navigationTitle(medication == nil ? "Add Medication" : "Edit Medication")
+        .navigationTitle(medication == nil ? "Add Medication" : "Edit \(name)")
+        .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .confirmationAction) { saveButton }
-            ToolbarItem(placement: .cancellationAction) { cancelButton }
+            ToolbarItem(placement: .topBarLeading) { cancelButton }
         }
     }
 
@@ -66,14 +64,21 @@ struct EditMedicationView: View {
             existingMedication.name = name
             existingMedication.dosage = dosage
             existingMedication.time = time.timeIntervalSinceReferenceDate
-            existingMedication.isReminderSet = isReminderSet
         } else {
             // Create a new medication
-            let newMedication = Medication(name: name, dosage: dosage, time: time.timeIntervalSinceReferenceDate, isReminderSet: isReminderSet)
+            let newMedication = Medication(name: name, 
+                                           dosage: dosage,
+                                           time: time.timeIntervalSinceReferenceDate
+            )
             modelContext.insert(newMedication)
         }
 
-        // Note: Consider using try? modelContext.save() for error handling
+        // Save Context
+        do {
+            try modelContext.save()
+        } catch {
+            print("Do something here")
+        }
     }
 }
 

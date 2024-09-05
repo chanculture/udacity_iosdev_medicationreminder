@@ -14,7 +14,7 @@
 		C03A6A7E2B8E5332008E8380 /* Medication_ReminderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03A6A7D2B8E5332008E8380 /* Medication_ReminderUITests.swift */; };
 		C03A6A802B8E5332008E8380 /* Medication_ReminderUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03A6A7F2B8E5332008E8380 /* Medication_ReminderUITestsLaunchTests.swift */; };
 		C070F7B12BD1839E00824B8C /* MedicationDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C070F7B02BD1839E00824B8C /* MedicationDashboard.swift */; };
-		C0D1FDBC2BC8A51100F5E6CE /* medication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D1FDBB2BC8A51100F5E6CE /* medication.swift */; };
+		C0D1FDBC2BC8A51100F5E6CE /* Medication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D1FDBB2BC8A51100F5E6CE /* Medication.swift */; };
 		C0D1FDC72BC8E27600F5E6CE /* EditMedicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D1FDC62BC8E27600F5E6CE /* EditMedicationView.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +46,7 @@
 		C03A6A7D2B8E5332008E8380 /* Medication_ReminderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Medication_ReminderUITests.swift; sourceTree = "<group>"; };
 		C03A6A7F2B8E5332008E8380 /* Medication_ReminderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Medication_ReminderUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C070F7B02BD1839E00824B8C /* MedicationDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationDashboard.swift; sourceTree = "<group>"; };
-		C0D1FDBB2BC8A51100F5E6CE /* medication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = medication.swift; sourceTree = "<group>"; };
+		C0D1FDBB2BC8A51100F5E6CE /* Medication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Medication.swift; sourceTree = "<group>"; };
 		C0D1FDBD2BC8A89600F5E6CE /* Medication-Reminder-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Medication-Reminder-Info.plist"; sourceTree = SOURCE_ROOT; };
 		C0D1FDC62BC8E27600F5E6CE /* EditMedicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMedicationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,6 +76,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10DFFD032C882EB00010180F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C0D1FDBB2BC8A51100F5E6CE /* Medication.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		10DFFD042C899D930010180F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C070F7B02BD1839E00824B8C /* MedicationDashboard.swift */,
+				C0D1FDC62BC8E27600F5E6CE /* EditMedicationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		C03A6A542B8E5331008E8380 = {
 			isa = PBXGroup;
 			children = (
@@ -101,9 +118,8 @@
 			children = (
 				C0D1FDBD2BC8A89600F5E6CE /* Medication-Reminder-Info.plist */,
 				C03A6A602B8E5331008E8380 /* Medication_ReminderApp.swift */,
-				C070F7B02BD1839E00824B8C /* MedicationDashboard.swift */,
-				C0D1FDC62BC8E27600F5E6CE /* EditMedicationView.swift */,
-				C0D1FDBB2BC8A51100F5E6CE /* medication.swift */,
+				10DFFD042C899D930010180F /* Views */,
+				10DFFD032C882EB00010180F /* Models */,
 				C03A6A662B8E5332008E8380 /* Assets.xcassets */,
 				C03A6A682B8E5332008E8380 /* Preview Content */,
 			);
@@ -267,7 +283,7 @@
 			files = (
 				C070F7B12BD1839E00824B8C /* MedicationDashboard.swift in Sources */,
 				C0D1FDC72BC8E27600F5E6CE /* EditMedicationView.swift in Sources */,
-				C0D1FDBC2BC8A51100F5E6CE /* medication.swift in Sources */,
+				C0D1FDBC2BC8A51100F5E6CE /* Medication.swift in Sources */,
 				C03A6A612B8E5331008E8380 /* Medication_ReminderApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,10 +449,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Medication Reminder/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8XBYLW7368;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Medication-Reminder-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Medication Reminder";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -448,6 +466,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.taaft.medication.reminder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -465,10 +484,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Medication Reminder/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8XBYLW7368;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Medication-Reminder-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Medication Reminder";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.medical";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -480,6 +501,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.taaft.medication.reminder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
