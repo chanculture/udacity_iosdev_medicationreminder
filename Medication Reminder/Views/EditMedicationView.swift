@@ -32,10 +32,16 @@ struct EditMedicationView: View {
     var body: some View {
         VStack {
             Form {
-                TextField("Name", text: $name)
-                TextField("Dosage", text: $dosage)
-                DatePicker("Time", selection: $time, displayedComponents: .hourAndMinute)
+                Section {
+                    TextField("Name", text: $name)
+                    TextField("Dosage", text: $dosage)
+                    DatePicker("Reminder Time", selection: $time, displayedComponents: .hourAndMinute)
+                }
+                if medication != nil {
+                    deleteButton
+                }
             }
+            
         }
         .navigationTitle(medication == nil ? "Add Medication" : "Edit \(name)")
         .navigationBarBackButtonHidden(true)
@@ -56,6 +62,20 @@ struct EditMedicationView: View {
         Button("Cancel", role: .cancel) {
             dismiss()
         }
+    }
+    
+    private var deleteButton: some View {
+        Button(
+            role: .destructive,
+            action: {
+                delete(medication: medication!)
+                dismiss()
+            },
+            label: {
+                Text("Delete")
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
+        )
     }
 
     private func saveChanges() {
@@ -79,6 +99,10 @@ struct EditMedicationView: View {
         } catch {
             print("Do something here")
         }
+    }
+    
+    private func delete(medication:Medication) {
+        modelContext.delete(medication)
     }
 }
 

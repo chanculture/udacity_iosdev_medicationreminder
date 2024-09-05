@@ -15,15 +15,24 @@ struct MedicationDashboard: View {
     var body: some View {
         NavigationStack { // Note: NavigationStack for hierarchical navigation
             VStack {
-                Text("Medication Reminders")
-                    .font(.headline)
+                
                 List {
-                    ForEach(medications) { medication in
-                        NavigationLink(destination: EditMedicationView(medication: medication)) {
-                            MedicationDashboardRow(medication: medication)
+                    Section {
+                        ForEach(medications) { medication in
+                            NavigationLink(destination: EditMedicationView(medication: medication)) {
+                                MedicationDashboardRow(medication: medication)
+                            }
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                Button("Delete", systemImage: "trash", role: .destructive) {
+                                    delete(medication: medication)
+                                }
+                            }
                         }
+                    } header: {
+                        Text("Medication Reminders")
                     }
                 }
+                
                 // ... Other dashboard elements...
             }
             .navigationTitle("Dashboard")
@@ -36,7 +45,13 @@ struct MedicationDashboard: View {
             }
         }
     }
+    
+    private func delete(medication: Medication) {
+        modelContext.delete(medication)
+    }
+    
 }
+
 
 struct MedicationDashboardRow: View {
     @Environment(\.modelContext) private var modelContext
@@ -60,7 +75,7 @@ struct MedicationDashboardRow: View {
 
             Toggle("", isOn: $isReminderSet)
                 .onChange(of: isReminderSet, {
-                    isReminderSet.toggle()
+                    medication.isReminderSet.toggle()
                     do {
                         try modelContext.save()
                     } catch {
@@ -71,11 +86,8 @@ struct MedicationDashboardRow: View {
         }
     }
 
-
 }
 
 #Preview {
     MedicationDashboard()
 }
-
-
